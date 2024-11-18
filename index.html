@@ -11,6 +11,48 @@
         color: white;
         margin: 0;
     }
+    
+    @keyframes rotate {
+        from {
+            transform: rotateY(0deg);
+        }
+        to {
+            transform: rotateY(360deg);
+        }
+    }
+
+    .rotating-logo {
+        animation: rotate 10s linear infinite;
+    }
+
+    .carousel-container {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .carousel {
+        overflow: hidden;
+        width: 300px; /* Adjust width as needed */
+    }
+
+    .carousel-wrapper {
+        display: flex;
+        transition: transform 0.5s ease-in-out;
+    }
+
+    .carousel-item {
+        min-width: 300px; /* Match width of the carousel */
+        text-align: center;
+        padding: 10px;
+    }
+
+    .arrow {
+        background-color: transparent;
+        border: none;
+        font-size: 24px;
+        cursor: pointer;
+    }
 </style>
 </head>
 <body>
@@ -19,7 +61,7 @@
     </a>
     <section>
         <div class="w-full mx-auto mt-4">
-            <img class="text-center mx-auto w-1/2" src="StageFrightNobg.png" alt="Stage Fright Logo">
+            <img class="text-center mx-auto w-1/2 rotating-logo" src="StageFrightNobg.png" alt="Stage Fright Logo">
         </div>
     </section>
     <section>
@@ -27,16 +69,67 @@
             <p class="text-center text-xl"><a href="">About</a> | <a href="tour.html" target="_blank">Tour</a> | <a href="">Merch</a></p>
         </div>
     </section>
-    <section>
-        <div class="h-64 w-1/2 mx-auto">
-           
+
+    <section class="mt-12">
+        <h1 class="text-center text-4xl">Merch</h1>
+        <div class="carousel-container">
+            <button class="arrow left rounded-lg w-12" onclick="prevItem()">&#10094;</button>
+            <div class="carousel">
+                <div class="carousel-wrapper">
+                    <div class="carousel-item">
+                        <img src="merchhood.png" alt="StageFright Hoodie">
+                    </div>
+                    <div class="carousel-item">
+                        <img src="capnobg-ezgif.com-crop.png" alt="StageFright Cap">
+                    </div>
+                    <div class="carousel-item">
+                        <img src="merch.png" alt="StageFright Tee">
+                    </div>
+                </div>
+            </div>
+            <button class="arrow right rounded-lg w-12" onclick="nextItem()">&#10095;</button>
         </div>
-    </section>
+        <div class="mx-auto w-full text-center">
+            <a href="merch.html"target="_blank" class="bg-white hover:bg-gray-300 text-black rounded-xl text-center mx-auto py-2 px-4">View More</a>
+        </div>
+     </section>
     
     <section>
         <div>
             <img class="h-1/2 w-1/2 mx-auto rounded-lg mt-10" src="background.webp" alt="stage fright background cover">
         </div>
     </section>
+    <script>
+        let currentIndex = 0;
+        const items = document.querySelectorAll('.carousel-item');
+        const wrapper = document.querySelector('.carousel-wrapper');
+        const itemWidth = items[0].offsetWidth;
+
+        function updateCarousel() {
+            const offset = -currentIndex * itemWidth;
+            wrapper.style.transform = `translateX(${offset}px)`;
+        }
+
+        function prevItem() {
+            if (currentIndex > 0) {
+                currentIndex--;
+            } else {
+                currentIndex = items.length - 1; // Loop to the last item
+            }
+            updateCarousel();
+        }
+
+        function nextItem() {
+            if (currentIndex < items.length - 1) {
+                currentIndex++;
+            } else {
+                currentIndex = 0; // Loop to the first item
+            }
+            updateCarousel();
+        }
+
+        // Initialize carousel view
+        updateCarousel();
+    </script>
 </body>
 </html>
