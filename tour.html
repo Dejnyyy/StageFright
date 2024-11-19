@@ -4,15 +4,132 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Stage Fright - Tour</title>
-    <style>
-        body{
-            background-color: black;
-            color: white;
-            margin: 0;
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="script.js"></script>
+<style>
+   body {
+    margin: 0;
+}
+    @keyframes rotate {
+        from {
+            transform: rotateY(0deg);
         }
-    </style>
+        to {
+            transform: rotateY(360deg);
+        }
+    }
+
+    .rotating-logo {
+        animation: rotate 10s linear infinite;
+    }
+
+    .carousel-container {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .carousel {
+        overflow: hidden;
+        width: 300px; /* Adjust width as needed */
+    }
+
+    .carousel-wrapper {
+        display: flex;
+        transition: transform 0.5s ease-in-out;
+    }
+
+    .carousel-item {
+        min-width: 300px; /* Match width of the carousel */
+        text-align: center;
+        padding: 10px;
+    }
+
+    .arrow {
+        background-color: transparent;
+        border: none;
+        font-size: 24px;
+        cursor: pointer;
+    }
+    h1{
+        background:url(background.webp) 50% 50%;
+        background-size:cover;
+        -webkit-text-fill-color:transparent;
+        -webkit-background-clip: text
+    }
+   
+</style>
 </head>
 <body>
+    <a href="tour.html" target="_blank">
+        <marquee class="top-0 fixed z-40 font-bol text-black" behavior="scroll" direction="left">!!! New Tour - Check out the schedule !!!</marquee>
+    </a>
+    <section>
+        <div class="w-full mx-auto mt-4">
+            <img class="text-center mx-auto w-1/2 rotating-logo" src="StageFrightNobg.png" alt="Stage Fright Logo">
+        </div>
+    </section>
+    <section>
+        <div class="mx-auto w-full">
+            <p class="text-center text-xl"><a href="">About</a> | <a href="tour.html" target="_blank">Tour</a> | <a href="merch.html">Merch</a></p>
+        </div>
+    </section>
+
     
+    <section class="">
+        <div class="overflow-x-auto">
+            <div class="overflow-x-auto table-container mt-32">
+            <table class="min-w-full table-auto text-white bg-black  border-separate border-spacing-y-2">
+                <thead class="">
+                    <tr class="">
+                        <th class="px-4 py-2 text-left uppercase text-sm md:text-base">Date</th>
+                        <th class="px-4 py-2 text-left uppercase text-sm md:text-base">City</th>
+                        <th class="px-4 py-2 text-left uppercase text-sm md:text-base">Venue</th>
+                        <th class="px-4 py-2 text-left uppercase text-sm md:text-base">Tickets</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="hover:bg-gray-800 transition-colors">
+                        <td class="px-4 py-2 border-t border-gray-700 text-sm md:text-base">November 16-17</td>
+                        <td class="px-4 py-2 border-t border-gray-700 text-sm md:text-base">Las Vegas, NV</td>
+                        <td class="px-4 py-2 border-t border-gray-700 text-sm md:text-base">ComplexCon</td>
+                        <td class="px-4 py-2 border-t border-gray-700 text-sm md:text-base text-blue-500">
+                            <a href="#" class="underline">Tickets</a>
+                        </td>
+                    </tr>
+                    <tr class="hover:bg-gray-800 transition-colors">
+                        <td class="px-4 py-2 border-t border-gray-700 text-sm md:text-base">December 14</td>
+                        <td class="px-4 py-2 border-t border-gray-700 text-sm md:text-base">Miami Gardens, FL</td>
+                        <td class="px-4 py-2 border-t border-gray-700 text-sm md:text-base">Rolling Loud</td>
+                        <td class="px-4 py-2 border-t border-gray-700 text-sm md:text-base text-blue-500">
+                            <a href="#" class="underline">Tickets</a>
+                        </td>
+                    </tr>
+                    <tr class="hover:bg-gray-800 transition-colors">
+                        <td class="px-4 py-2 border-t border-gray-700 text-sm md:text-base">December 20</td>
+                        <td class="px-4 py-2 border-t border-gray-700 text-sm md:text-base">Gallipolis, OH</td>
+                        <td class="px-4 py-2 border-t border-gray-700 text-sm md:text-base">Gallipolis City Park</td>
+                        <td class="px-4 py-2 border-t border-gray-700 text-sm md:text-base text-blue-500">
+                            <a href="#" class="underline">Tickets</a>
+                        </td>
+                    </tr>
+                    <tr class="hover:bg-gray-800 transition-colors">
+                        <td class="px-4 py-2 border-t border-gray-700 text-sm md:text-base">December 28</td>
+                        <td class="px-4 py-2 border-t border-gray-700 text-sm md:text-base">Hunington, WV</td>
+                        <td class="px-4 py-2 border-t border-gray-700 text-sm md:text-base">AT&T Stadium</td>
+                        <td class="px-4 py-2 border-t border-gray-700 text-sm md:text-base text-blue-500">
+                            <a href="#" class="underline">Tickets</a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            </div>
+        </div>
+    </section>
+    <section>
+        <div>
+            <img src="background.webp" alt="">
+        </div>
+    </section>
 </body>
 </html>

@@ -82,6 +82,27 @@
                 </div>
         </div>
     </section>
-
+    <script>
+        async function createCheckoutSession(priceId) {
+          try {
+            const response = await fetch('/create-checkout-session', {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json'
+              },
+              body: JSON.stringify({ priceId })
+            });
+            const session = await response.json();
+            if (session.url) {
+              window.location.href = session.url; // Redirect to Stripe checkout
+            } else {
+              console.error('Session URL not found');
+            }
+          } catch (error) {
+            console.error('Error creating checkout session:', error);
+          }
+        }
+      </script>
+      
 </body>
 </html>
