@@ -53,23 +53,31 @@
                         <a href="merchhood.png"target="_blank"><img class="h-full px-2 py-4 hover:scale-125 mx-auto" src="merchhood.png" alt="StageFright Hoodie">
                         </a><div class="flex flex-row">
                             <p class="m-auto">$40</p>
-                            <button class="bg-white hover:bg-gray-300 text-black px-4 py-2 rounded-xl m-auto my-2"> Buy Now</button>
-                        </div>
-
+                            <form action="/create-checkout-session" method="POST">
+                                <input type="hidden" name="price_id" value="price_3ExampleDKtEoZ5pU2DVEAkc9Z"> <!-- Price ID for Product 3 -->
+                                <button type="submit" class="checkout-button bg-white hover:bg-gray-300 text-black px-4 py-2 rounded-xl m-auto my-2 mr-2">Buy Now</button>
+                              </form>
+                         </div>
                     </div>
                     <div class="border border-white flex flex-col rounded-lg w-full">
                         <a href="merchcap.png" target="_blank"><img class="h-full px-2 py-12 hover:scale-125 mx-auto" src="merchcap.png" alt="StageFright Cap">
                         </a> <div class="flex flex-row">
                             <p class="m-auto">$15</p>
-                            <button class="bg-white hover:bg-gray-300 text-black px-4 py-2 rounded-xl m-auto my-2"> Buy Now</button>
+                            <form action="/create-checkout-session" method="POST">
+                                <input type="hidden" name="price_id" value="price_3ExampleDKtEoZ5pU2DVEAkc9Z"> <!-- Price ID for Product 3 -->
+                                <button type="submit" class="checkout-button bg-white hover:bg-gray-300 text-black px-4 py-2 rounded-xl m-auto my-2 mr-2">Buy Now</button>
+                              </form>
                         </div>
                     </div>
                     <div class="border border-white flex flex-col rounded-lg w-full">
                         <a href="merch.png" target="_blank"><img class="h-full px-2 py-6 hover:scale-125 mx-auto" src="merch.png" alt="StageFright Tee">
                         </a><div class="flex flex-row">
                             <p class="m-auto">$20</p>
-                            <button class="bg-white hover:bg-gray-300 text-black px-4 py-2 rounded-xl m-auto my-2"> Buy Now</button>
-                        </div>
+                            <form action="/create-checkout-session" method="POST">
+                                <input type="hidden" name="price_id" value="price_3ExampleDKtEoZ5pU2DVEAkc9Z"> <!-- Price ID for Product 3 -->
+                                <button type="submit" class="checkout-button bg-white hover:bg-gray-300 text-black px-4 py-2 rounded-xl m-auto my-2 mr-2">Buy Now</button>
+                              </form>
+                         </div>
                     </div>
                 </div>
         </div>
