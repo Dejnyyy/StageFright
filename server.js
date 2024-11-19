@@ -3,7 +3,7 @@ const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
 const express = require('express');
 const app = express();
 app.use(express.static('public'));
-app.use(express.json()); // Parse JSON body
+app.use(express.json());
 
 const YOUR_DOMAIN = 'http://localhost:4242';
 
