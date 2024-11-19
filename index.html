@@ -60,6 +60,15 @@
         -webkit-text-fill-color:transparent;
         -webkit-background-clip: text
     }
+    .table-container {
+    opacity: 0;
+    transition: opacity 0.5s ease-in-out;
+}
+
+.table-container.visible {
+    opacity: 1;
+}
+
 </style>
 </head>
 <body>
@@ -101,7 +110,8 @@
         </div>
      </section>
     <section class="mt-12">
-        <div class="overflow-x-auto">
+        <div class="overflow-x-auto mt-32">
+            <div class="overflow-x-auto table-container">
             <table class="min-w-full table-auto text-white bg-black  border-separate border-spacing-y-2">
                 <thead class="">
                     <tr class="">
@@ -146,6 +156,7 @@
                     </tr>
                 </tbody>
             </table>
+            </div>
         </div>
     </section>
     <section class="mt-12">
@@ -191,6 +202,20 @@
 
         // Initialize carousel view
         updateCarousel();
+        document.addEventListener('scroll', function () {
+    const tableContainer = document.querySelector('.table-container');
+    const rect = tableContainer.getBoundingClientRect();
+    const windowHeight = window.innerHeight;
+
+    // Check if the table is within the viewport to add the 'visible' class
+    if (rect.top < windowHeight && rect.bottom >= 0) {
+        tableContainer.classList.add('visible');
+    } else {
+        tableContainer.classList.remove('visible');
+    }
+});
+
+
     </script>
 </body>
 </html>
