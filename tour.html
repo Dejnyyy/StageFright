@@ -8,6 +8,8 @@
     <script src="script.js"></script>
 <style>
    body {
+    background-color: black;
+    color: white;
     margin: 0;
 }
     @keyframes rotate {
@@ -22,35 +24,6 @@
     .rotating-logo {
         animation: rotate 10s linear infinite;
     }
-
-    .carousel-container {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-    }
-
-    .carousel {
-        overflow: hidden;
-        width: 300px; /* Adjust width as needed */
-    }
-
-    .carousel-wrapper {
-        display: flex;
-        transition: transform 0.5s ease-in-out;
-    }
-
-    .carousel-item {
-        min-width: 300px; /* Match width of the carousel */
-        text-align: center;
-        padding: 10px;
-    }
-
-    .arrow {
-        background-color: transparent;
-        border: none;
-        font-size: 24px;
-        cursor: pointer;
-    }
     h1{
         background:url(background.webp) 50% 50%;
         background-size:cover;
@@ -62,7 +35,7 @@
 </head>
 <body>
     <a href="tour.html" target="_blank">
-        <marquee class="top-0 fixed z-40 font-bol text-black" behavior="scroll" direction="left">!!! New Tour - Check out the schedule !!!</marquee>
+        <marquee class="top-0 fixed z-40 font-bold" behavior="scroll" direction="left">!!! New Tour - Check out the schedule !!!</marquee>
     </a>
     <section>
         <div class="w-full mx-auto mt-4">
@@ -128,7 +101,7 @@
     </section>
     <section>
         <div>
-            <img src="background.webp" alt="">
+            <img src="bg.png" alt="tour Stage Fright">
         </div>
     </section>
 </body>
