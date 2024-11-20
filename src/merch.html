@@ -49,36 +49,52 @@
     <section>
         <div class="mt-12">
                 <div class="grid grid-cols-1 lg:grid-cols-3 w-1/2 mx-auto gap-4 space-y-4 lg:space-y-0 ">
-                    <div class="border border-white flex flex-col rounded-lg w-full">
-                        <a href="merchhood.png"target="_blank"><img class="h-full px-2 py-4 hover:scale-125 mx-auto" src="merchhood.png" alt="StageFright Hoodie">
-                        </a><div class="flex flex-row">
-                            <p class="m-auto">$40</p>
-                            <button type="submit" class=" bg-white hover:bg-gray-300 text-black px-4 py-2 rounded-xl m-auto my-2 mr-2">Buy Now</button>
-                         </div>
+                   <!-- Replace each "Buy Now" button with a link to checkout.html -->
+                   <div class="border border-white flex flex-col rounded-lg w-full">
+                    <a href="merchhood.png" target="_blank">
+                        <img class="h-full px-2 py-4 hover:scale-125 mx-auto" src="merchhood.png" alt="StageFright Hoodie">
+                    </a>
+                    <div class="flex flex-row">
+                        <p class="m-auto">$40</p>
+                        <a href="checkout.html?product=StageFright%20Hoodie&price=40&image=merchhood.png" 
+                           class="bg-white hover:bg-gray-300 text-black px-4 py-2 rounded-xl m-auto my-2 mr-2">
+                           Buy Now
+                        </a>
                     </div>
-                    <div class="border border-white flex flex-col rounded-lg w-full">
-                        <a href="merchcap.png" target="_blank"><img class="h-full px-2 py-12 hover:scale-125 mx-auto" src="merchcap.png" alt="StageFright Cap">
-                        </a> <div class="flex flex-row">
-                            <p class="m-auto">$15</p>
-                            <button type="submit" class=" bg-white hover:bg-gray-300 text-black px-4 py-2 rounded-xl m-auto my-2 mr-2">Buy Now</button>
-                        </div>
+                </div>
+                
+                <div class="border border-white flex flex-col rounded-lg w-full">
+                    <a href="merchcap.png" target="_blank">
+                        <img class="h-full px-2 py-12 hover:scale-125 mx-auto" src="merchcap.png" alt="StageFright Cap">
+                    </a>
+                    <div class="flex flex-row">
+                        <p class="m-auto">$15</p>
+                        <a href="checkout.html?product=StageFright%20Cap&price=15&image=merchcap.png" 
+                           class="bg-white hover:bg-gray-300 text-black px-4 py-2 rounded-xl m-auto my-2 mr-2">
+                           Buy Now
+                        </a>
                     </div>
-                    <div class="border border-white flex flex-col rounded-lg w-full">
-                        <a href="merch.png" target="_blank"><img class="h-full px-2 py-6 hover:scale-125 mx-auto" src="merch.png" alt="StageFright Tee">
-                        </a><div class="flex flex-row">
-                            <p class="m-auto">$20</p>
-                               <button type="submit" class=" bg-white hover:bg-gray-300 text-black px-4 py-2 rounded-xl m-auto my-2 mr-2">Buy Now</button>
+                </div>
+                
+                <div class="border border-white flex flex-col rounded-lg w-full">
+                    <a href="merch.png" target="_blank">
+                        <img class="h-full px-2 py-6 hover:scale-125 mx-auto" src="merch.png" alt="StageFright Tee">
+                    </a>
+                    <div class="flex flex-row">
+                        <p class="m-auto">$20</p>
+                        <a href="checkout.html?product=StageFright%20Tee&price=20&image=merch.png" 
+                           class="bg-white hover:bg-gray-300 text-black px-4 py-2 rounded-xl m-auto my-2 mr-2">
+                           Buy Now
+                        </a>
                     </div>
+                </div>
+                
+
                 </div>
         </div>
     </section>
-    <div id="paypal-button-container"></div>
-    <p id="result-message"></p>
+    
  </div>
-    <script
-            src="https://www.paypal.com/sdk/js?client-id=ATAvH8bsL9PnoXUGTFLXz9uTOaIrfSMxmlHQjUU1n2auT49pKuZrM2SqRjg7vlT2JlseJKc8RmnxMMRO&buyer-country=US&currency=USD&components=buttons&enable-funding=venmo,paylater,card"
-            data-sdk-integration-source="developer-studio"
-        ></script>
-    <script src="app.js"></script>
+    
 </body>
 </html>

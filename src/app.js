@@ -3,9 +3,9 @@ window.paypal
         style: {
             shape: "rect",
             layout: "vertical",
-            color: "gold",
+            color: "white",
             label: "paypal",
-        },
+        } ,
         message: {
             amount: 100,
         } ,

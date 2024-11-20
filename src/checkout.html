@@ -1,22 +1,42 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <title>Buy cool new product</title>
-    <link rel="stylesheet" href="style.css">
-    <script src="https://js.stripe.com/v3/"></script>
-  </head>
-  <body>
-    <section>
-      <div class="product">
-        <img src="merch.png" alt="The cover of Stubborn Attachments" />
-        <div class="description">
-          <h3>Teeshirt</h3>
-          <h5>$20.00</h5>
-        </div>
-      </div>
-      <form action="/create-checkout-session" method="POST">
-        <button type="submit" id="checkout-button">Checkout</button>
-      </form>
-    </section>
-  </body>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <title>Checkout</title>
+</head>
+<body class="bg-black text-white">
+    <div class="container mx-auto mt-10 text-center">
+        <h1 class="text-3xl font-bold">Checkout</h1>
+        <div id="product-info" class="mt-8"></div>
+    </div>
+    <div class="mx-auto text-center w-1/2">
+      <div id="paypal-button-container" class=""></div>
+      <p id="result-message"></p>
+    </div>
+   
+    <script>
+        // Get URL parameters
+        const params = new URLSearchParams(window.location.search);
+        const product = params.get('product');
+        const price = params.get('price');
+        const image = params.get('image'); // Get the image URL
+
+        // Display product info
+        const productInfoDiv = document.getElementById('product-info');
+        productInfoDiv.innerHTML = `
+            <img class="mx-auto rounded-lg shadow-lg w-1/4" src="${image}" alt="${product}">
+            <p class="text-lg mt-4">Product: <span class="font-bold">${product}</span></p>
+            <p class="text-lg">Price: <span class="font-bold">$${price}</span></p>
+            <button class="bg-white text-black px-4 py-2 mt-4 rounded-lg">Proceed to Payment</button>
+        `;
+    </script>
+    
+    <script
+    src="https://www.paypal.com/sdk/js?client-id=ATAvH8bsL9PnoXUGTFLXz9uTOaIrfSMxmlHQjUU1n2auT49pKuZrM2SqRjg7vlT2JlseJKc8RmnxMMRO&buyer-country=US&currency=USD&components=buttons&enable-funding=venmo,paylater,card"
+    data-sdk-integration-source="developer-studio"
+></script>
+<script src="app.js"></script>
+</body>
 </html>
