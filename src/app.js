@@ -23,7 +23,7 @@ window.paypal
                         cart: [
                             {
                                 id: "YOUR_PRODUCT_ID",
-                                quantity: "YOUR_PRODUCT_QUANTITY",
+                                quantity: "1",
                             },
                         ],
                     }),
