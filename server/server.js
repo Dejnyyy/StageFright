@@ -4,7 +4,7 @@ const express = require('express');
 const app = express();
 app.use(express.static('public'));
 
-const YOUR_DOMAIN = 'http://localhost:4242';
+const YOUR_DOMAIN = 'https://localhost:4242';
 
 app.post('/create-checkout-session', async (req, res) => {
   const session = await stripe.checkout.sessions.create({
@@ -15,8 +15,8 @@ app.post('/create-checkout-session', async (req, res) => {
       },
     ],
     mode: 'payment',
-    success_url: `${"http://localhost:4242"}/success.html`,
-    cancel_url: `${"http://localhost:4242"}/cancel.html`,
+    success_url: `${"https://localhost:4242"}/success.html`,
+    cancel_url: `${"https://localhost:4242"}/cancel.html`,
     automatic_tax: {enabled: true},
 });
 
