@@ -75,34 +75,36 @@
                             <p class="m-auto">$20</p>
                             <form action="/create-checkout-session" method="POST">
                                 <input type="hidden" name="price_id" value="price_3ExampleDKtEoZ5pU2DVEAkc9Z"> <!-- Price ID for Product 3 -->
-                                <button type="submit" class="checkout-button bg-white hover:bg-gray-300 text-black px-4 py-2 rounded-xl m-auto my-2 mr-2">Buy Now</button>
-                              </form>
+                                <button onclick="createCheckoutSession('price_3ExampleDKtEoZ5pU2DVEAkc9Z')" class="checkout-button bg-white hover:bg-gray-300 text-black px-4 py-2 rounded-xl m-auto my-2 mr-2">Buy Now</button>
+                            </form>
                          </div>
                     </div>
                 </div>
         </div>
     </section>
-    <script>
-        async function createCheckoutSession(priceId) {
-          try {
-            const response = await fetch('/create-checkout-session', {
-              method: 'POST',
-              headers: {
-                'Content-Type': 'application/json'
-              },
-              body: JSON.stringify({ priceId })
-            });
-            const session = await response.json();
-            if (session.url) {
-              window.location.href = session.url; // Redirect to Stripe checkout
-            } else {
-              console.error('Session URL not found');
-            }
-          } catch (error) {
-            console.error('Error creating checkout session:', error);
-          }
+  
+<script>
+    async function createCheckoutSession(priceId) {
+      try {
+        const response = await fetch('/create-checkout-session', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({ priceId })
+        });
+        const session = await response.json();
+        if (session.url) {
+          window.location.href = session.url; // Redirect to Stripe checkout
+        } else {
+          console.error('Session URL not found');
         }
-      </script>
+      } catch (error) {
+        console.error('Error creating checkout session:', error);
+      }
+    }
+  </script>
+  
       
 </body>
 </html>
