@@ -33,6 +33,4 @@ app.post('/create-checkout-session', async (req, res) => {
       res.status(500).json({ error: 'An error occurred while creating the checkout session' });
     }
   });
-  
-
 app.listen(4242, () => console.log('Running on port 4242'));
