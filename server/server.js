@@ -35,57 +35,67 @@ const client = new Client({
 }); 
 const ordersController = new OrdersController(client);
 const paymentsController = new PaymentsController(client);
+const products = {
+  hoodie: { id: "hoodie", name: "Hoodie", price: "40.00", currency: "USD" },
+  cap: { id: "cap", name: "Cap", price: "15.00", currency: "USD" },
+  teeshirt: { id: "teeshirt", name: "Tee-Shirt", price: "20.00", currency: "USD" },
+};
 
 /**
  * Create an order to start the transaction.
  * @see https://developer.paypal.com/docs/api/orders/v2/#orders_create
  */
-const createOrder = async (cart) => {
-    const collect = {
-        body: {
-            intent: "CAPTURE",
-            purchaseUnits: [
-                {
-                    amount: {
-                        currencyCode: "USD",
-                        value: "100",
-                    },
-                },
-            ],
-        },
-        prefer: "return=minimal",
-    }; 
+const createOrder = async (productId) => {
+  const product = products[productId];
+  if (!product) {
+      throw new Error("Product not found.");
+  }
 
-    try {
-        const { body, ...httpResponse } = await ordersController.ordersCreate(
-            collect
-        );
-        // Get more response info...
-        // const { statusCode, headers } = httpResponse;
-        return {
-            jsonResponse: JSON.parse(body),
-            httpStatusCode: httpResponse.statusCode,
-        };
-    } catch (error) {
-        if (error instanceof ApiError) {
-            // const { statusCode, headers } = error;
-            throw new Error(error.message);
-        }
-    }
+  const collect = {
+      body: {
+          intent: "CAPTURE",
+          purchaseUnits: [
+              {
+                  amount: {
+                      currencyCode: product.currency,
+                      value: product.price,
+                  },
+              },
+          ],
+      },
+      prefer: "return=minimal",
+  };
+
+  try {
+      const { body, ...httpResponse } = await ordersController.ordersCreate(collect);
+      return {
+          jsonResponse: JSON.parse(body),
+          httpStatusCode: httpResponse.statusCode,
+      };
+  } catch (error) {
+      if (error instanceof ApiError) {
+          throw new Error(error.message);
+      }
+  }
 };
+
 
 // createOrder route
 app.post("/api/orders", async (req, res) => {
-    try {
-        // use the cart information passed from the front-end to calculate the order amount detals
-        const { cart } = req.body;
-        const { jsonResponse, httpStatusCode } = await createOrder(cart);
-        res.status(httpStatusCode).json(jsonResponse);
-    } catch (error) {
-        console.error("Failed to create order:", error);
-        res.status(500).json({ error: "Failed to create order." });
-    }
+  try {
+      const { productId } = req.body;
+      if (!productId) {
+          return res.status(400).json({ error: "Product ID is required." });
+      }
+
+      const { jsonResponse, httpStatusCode } = await createOrder(productId);
+      res.status(httpStatusCode).json(jsonResponse);
+  } catch (error) {
+      console.error("Failed to create order:", error);
+      res.status(500).json({ error: error.message || "Failed to create order." });
+  }
 });
+
 
 
 
