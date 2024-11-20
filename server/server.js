@@ -45,6 +45,7 @@ const products = {
  * Create an order to start the transaction.
  * @see https://developer.paypal.com/docs/api/orders/v2/#orders_create
  */
+
 const createOrder = async (productId) => {
   const product = products[productId];
   if (!product) {
@@ -103,6 +104,8 @@ app.post("/api/orders", async (req, res) => {
  * Capture payment for the created order to complete the transaction.
  * @see https://developer.paypal.com/docs/api/orders/v2/#orders_capture
  */
+
+
 const captureOrder = async (orderID) => {
     const collect = {
         id: orderID,
@@ -114,14 +117,14 @@ const captureOrder = async (orderID) => {
             collect
         );
         // Get more response info...
-        // const { statusCode, headers } = httpResponse;
+        const { statusCode, headers } = httpResponse;
         return {
             jsonResponse: JSON.parse(body),
             httpStatusCode: httpResponse.statusCode,
         };
     } catch (error) {
         if (error instanceof ApiError) {
-            // const { statusCode, headers } = error;
+             const { statusCode, headers } = error;
             throw new Error(error.message);
         }
     }

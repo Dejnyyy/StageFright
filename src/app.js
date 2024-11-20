@@ -9,7 +9,7 @@ window.paypal
         message: {
             amount: 100,
         } ,
-
+        
         async createOrder() {
             try {
                 const response = await fetch("/api/orders", {
@@ -22,7 +22,7 @@ window.paypal
                     body: JSON.stringify({
                         cart: [
                             {
-                                id: "YOUR_PRODUCT_ID",
+                                id: "product",
                                 quantity: "1",
                             },
                         ],
@@ -42,7 +42,7 @@ window.paypal
                 throw new Error(errorMessage);
             } catch (error) {
                 console.error(error);
-                // resultMessage(`Could not initiate PayPal Checkout...<br><br>${error}`);
+                resultMessage(`Could not initiate PayPal Checkout...<br><br>${error}`);
             }
         } ,
 
