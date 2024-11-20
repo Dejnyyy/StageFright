@@ -7,7 +7,7 @@ const app = express();
 app.use(express.static('public'));
 app.use(express.json());
 
-const YOUR_DOMAIN = 'http://localhost:4242';
+const YOUR_DOMAIN = 'http://127.0.0.1:5501/StageFright';
 
 app.post('/create-checkout-session', async (req, res) => {
     console.log('Received POST request:', req.body);
