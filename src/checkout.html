@@ -5,38 +5,140 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://cdn.tailwindcss.com"></script>
     <title>Checkout</title>
+    <style>
+        body {
+            background-color: black;
+            color: white;
+            margin: 0;
+        }
+    </style>
+    <script src="https://www.paypal.com/sdk/js?client-id=ATAvH8bsL9PnoXUGTFLXz9uTOaIrfSMxmlHQjUU1n2auT49pKuZrM2SqRjg7vlT2JlseJKc8RmnxMMRO&currency=USD"></script>
 </head>
-<body class="bg-black text-white">
-  <h1 class="absolute top-4 left-4"><a href="index.html">home</a> </h1>
-    <div class="container mx-auto mt-10 text-center">
+<body>
+<a href="merch.html" class="absolute top-4 left-4"><h1>Back</h1></a>    
+<div class="container mx-auto mt-10 text-center w-1/2">
         <h1 class="text-3xl font-bold">Checkout</h1>
         <div id="product-info" class="mt-8"></div>
+        <div id="paypal-button-container" class="mt-8"></div>
+        <p id="result-message" class="mt-4"></p>
     </div>
-    <div class="mx-auto text-center w-1/2">
-      <div id="paypal-button-container" class=""></div>
-      <p id="result-message"></p>
-    </div>
-   
+
     <script>
         // Get URL parameters
         const params = new URLSearchParams(window.location.search);
-        const product = params.get('product');
-        const price = params.get('price');
-        const image = params.get('image'); // Get the image URL
+        console.log(params);
+        const product = params.get("product");
+        const price = params.get("price");
+        const image = params.get("image");
+        console.log(product);
+        console.log(price);
+        console.log(image);
 
-        // Display product info
-        const productInfoDiv = document.getElementById('product-info');
+        // Display product details
+        const productInfoDiv = document.getElementById("product-info");
         productInfoDiv.innerHTML = `
             <img class="mx-auto rounded-lg shadow-lg w-1/4" src="${image}" alt="${product}">
-            <p class="text-lg mt-4">Product: <span class="font-bold">${product}</span></p>
-            <p class="text-lg">Price: <span class="font-bold">$${price}</span></p>
+            <p class="text-lg mt-4"><span class="font-bold">${product}</span></p>
+            <p class="text-lg"><span class="font-bold">$${price}</span></p>
         `;
+
+        // Show loader during API calls
+        const showLoader = (show) => {
+            const loader = document.createElement("div");
+            loader.id = "loader";
+            loader.innerHTML = "<p>Processing...</p>";
+            loader.style.color = "white";
+            loader.style.fontSize = "20px";
+            if (show) {
+                document.body.appendChild(loader);
+            } else {
+                const existingLoader = document.getElementById("loader");
+                if (existingLoader) existingLoader.remove();
+            }
+        };
+
+        // Render PayPal button
+        window.paypal.Buttons({
+            style: {
+                shape: "rect",
+                layout: "vertical",
+                color: "white",
+                label: "paypal",
+            },
+
+            // Create the order
+            createOrder: async () => {
+                showLoader(true);
+                try {
+                    const response = await fetch("/api/orders", {
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "application/json",
+                        },
+                        body: JSON.stringify({
+                            product,
+                            price,
+                        }),
+                    });
+
+                    const orderData = await response.json();
+                    if (orderData.id) {
+                        showLoader(false);
+                        return orderData.id;
+                    }
+
+                    const errorDetail = orderData?.details?.[0];
+                    const errorMessage = errorDetail
+                        ? `${errorDetail.issue} ${errorDetail.description} (${orderData.debug_id})`
+                        : JSON.stringify(orderData);
+
+                    throw new Error(errorMessage);
+                } catch (error) {
+                    console.error(error);
+                    document.getElementById("result-message").innerText =
+                        "Could not initiate PayPal Checkout.";
+                    showLoader(false);
+                }
+            },
+
+            // Capture the order
+            onApprove: async (data) => {
+                showLoader(true);
+                try {
+                    const response = await fetch(`/api/orders/${data.orderID}/capture`, {
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "application/json",
+                        },
+                    });
+
+                    const orderData = await response.json();
+                    const transaction =
+                        orderData?.purchase_units?.[0]?.payments?.captures?.[0];
+
+                    if (transaction) {
+                        document.getElementById("result-message").innerText =
+                            `Transaction ${transaction.status}: ${transaction.id}`;
+                    } else {
+                        throw new Error("Transaction capture failed.");
+                    }
+                } catch (error) {
+                    console.error(error);
+                    document.getElementById("result-message").innerText =
+                        "Transaction could not be processed.";
+                } finally {
+                    showLoader(false);
+                }
+            },
+
+            // Handle errors
+            onError: (err) => {
+                console.error(err);
+                document.getElementById("result-message").innerText =
+                    "An error occurred during checkout.";
+                showLoader(false);
+            },
+        }).render("#paypal-button-container");
     </script>
-    
-    <script
-    src="https://www.paypal.com/sdk/js?client-id=ATAvH8bsL9PnoXUGTFLXz9uTOaIrfSMxmlHQjUU1n2auT49pKuZrM2SqRjg7vlT2JlseJKc8RmnxMMRO&buyer-country=US&currency=USD&components=buttons&enable-funding=venmo,paylater,card"
-    data-sdk-integration-source="developer-studio"
-></script>
-<script src="app.js"></script>
 </body>
 </html>
